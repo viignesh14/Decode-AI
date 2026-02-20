@@ -18,12 +18,12 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // ── Valid models ──────────────────────────────────────────────
 const VALID_MODELS = new Set([
+    'gemini-2.5-flash',
+    'gemini-2.5-pro',
     'gemini-2.0-flash',
-    'gemini-2.0-flash-exp',
-    'gemini-1.5-flash-latest',
-    'gemini-1.5-pro-latest'
+    'gemini-2.0-flash-exp'
 ]);
-const DEFAULT_MODEL = 'gemini-2.0-flash';
+const DEFAULT_MODEL = 'gemini-2.5-flash';
 
 // ── Middleware ────────────────────────────────────────────────
 app.use(express.json({ limit: '100kb' }));  // Limit request body size
