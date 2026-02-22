@@ -17,12 +17,6 @@ const PORT = process.env.PORT || 3000;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // ── Valid models ──────────────────────────────────────────────
-const VALID_MODELS = new Set([
-    'gemini-2.5-flash',
-    'gemini-2.5-pro',
-    'gemini-2.0-flash',
-    'gemini-2.0-flash-exp'
-]);
 const DEFAULT_MODEL = 'gemini-2.5-flash';
 
 // ── Middleware ────────────────────────────────────────────────
@@ -67,8 +61,8 @@ app.post('/generate', async (req, res) => {
         return res.status(400).json({ error: 'Prompt too long (max 50,000 characters).' });
     }
 
-    // Resolve model — fall back to default if invalid/missing
-    const model = VALID_MODELS.has(requestedModel) ? requestedModel : DEFAULT_MODEL;
+    // Resolve model — enforce default
+    const model = DEFAULT_MODEL;
 
     try {
         const geminiModel = genAI.getGenerativeModel({
